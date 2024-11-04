@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: cuenta-movimientos-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_assingment
+    username: postgres
+    password: postgres
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+feign:
+  cliente_persona:
+    uri: http://cliente-persona-api:8081/api
+
+server:
+  servlet:
+    context-path: /api

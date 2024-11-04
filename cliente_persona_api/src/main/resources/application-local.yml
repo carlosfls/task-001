@@ -1,0 +1,19 @@
+spring:
+ datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/db_assingment
+    username: postgres
+    password: postgres
+
+ jpa:
+   hibernate:
+     ddl-auto: update
+   show-sql: true
+
+config:
+  active:
+    on-profile: local
+
+feign:
+  cuenta_movimiento:
+    uri: http://localhost:8080/api
