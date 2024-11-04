@@ -11,7 +11,6 @@ public class UpdateClienteDTO {
     private String direccion;
     private String telefono;
     private Genero genero;
-    private Long clienteId;
     private String password;
     private Boolean estado;
 }
