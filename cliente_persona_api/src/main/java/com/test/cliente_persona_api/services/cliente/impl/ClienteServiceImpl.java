@@ -37,21 +37,21 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDTO getById(Long id) throws NotFoundException {
+    public ClienteDTO getById(Long id) {
         return clienteRepository.findById(id)
                 .map(clienteMapper::toDto)
                 .orElseThrow(() -> new NotFoundException("Cliente con id " + id + " no existe"));
     }
 
     @Override
-    public String getByClienteId(String clienteId) throws NotFoundException {
+    public String getByClienteId(String clienteId) {
         return clienteRepository.findByClienteId(clienteId)
                 .map(Persona::getNombre)
                 .orElseThrow(() -> new NotFoundException("Cliente con id " + clienteId + " no existe"));
     }
 
     @Override
-    public ClienteDTO create(CreateClienteDTO dto) throws AlreadyExistException, UnprocessableEntityException {
+    public ClienteDTO create(CreateClienteDTO dto) {
         if (clienteRepository.existsByClienteId(dto.getClienteId())){
             throw new AlreadyExistException("El id proporcionado ya existe " + dto.getClienteId());
         }
@@ -64,7 +64,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDTO update(Long id, UpdateClienteDTO dto) throws NotFoundException {
+    public ClienteDTO update(Long id, UpdateClienteDTO dto) {
         return clienteRepository.findById(id)
                 .map(c -> clienteMapper.partialUpdate(dto, c))
                 .map(clienteRepository::save)
@@ -73,7 +73,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void delete(Long id) throws NotFoundException {
+    public void delete(Long id) {
         if (!clienteRepository.existsById(id)){
             throw new NotFoundException("No existe un cliente con id "+id);
         }

@@ -1,8 +1,5 @@
 package com.test.cliente_persona_api.resources;
 
-import com.test.cliente_persona_api.exceptions.AlreadyExistException;
-import com.test.cliente_persona_api.exceptions.NotFoundException;
-import com.test.cliente_persona_api.exceptions.UnprocessableEntityException;
 import com.test.cliente_persona_api.services.cliente.ClienteService;
 import com.test.cliente_persona_api.services.cliente.dto.ClienteDTO;
 import com.test.cliente_persona_api.services.cliente.dto.CreateClienteDTO;
@@ -39,28 +36,27 @@ public class ClienteResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> getById(@PathVariable Long id) throws NotFoundException {
-        System.out.println("");
+    public ResponseEntity<ClienteDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(clienteService.getById(id));
     }
 
     @GetMapping("/clienteId/{clienteId}")
-    public ResponseEntity<String> getNameByClienteId(@PathVariable String clienteId) throws NotFoundException {
+    public ResponseEntity<String> getNameByClienteId(@PathVariable String clienteId) {
         return ResponseEntity.ok(clienteService.getByClienteId(clienteId));
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> create(@RequestBody @Valid CreateClienteDTO dto) throws UnprocessableEntityException, AlreadyExistException {
+    public ResponseEntity<ClienteDTO> create(@RequestBody @Valid CreateClienteDTO dto) {
         return ResponseEntity.status(201).body(clienteService.create(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClienteDTO> update(@PathVariable Long id, @RequestBody UpdateClienteDTO dto) throws NotFoundException {
+    public ResponseEntity<ClienteDTO> update(@PathVariable Long id, @RequestBody UpdateClienteDTO dto) {
         return ResponseEntity.ok(clienteService.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) throws NotFoundException {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         clienteService.delete(id);
 
         return ResponseEntity.noContent().build();
