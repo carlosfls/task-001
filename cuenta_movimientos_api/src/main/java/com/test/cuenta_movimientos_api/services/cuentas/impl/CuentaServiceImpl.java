@@ -37,20 +37,21 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public CuentaDTO getById(Long id) throws NotFoundException {
+    public CuentaDTO getById(Long id) {
         return cuentaRepository.findById(id)
                 .map(cuentaMapper::toDto)
                 .orElseThrow(() -> new NotFoundException("Cuenta con id " + id + " no existe"));
     }
 
     @Override
-    public Cuenta getByNumber(String numeroCuenta) throws NotFoundException {
+    public Cuenta getByNumber(String numeroCuenta) {
         return cuentaRepository.findByNumeroCuenta(numeroCuenta)
                 .orElseThrow(() -> new NotFoundException("Cuenta con numero " + numeroCuenta + " no existe"));
     }
 
+    @Transactional
     @Override
-    public CuentaClienteDTO create(CreateCuentaDTO dto) throws AlreadyExistException, UnprocessableEntityException, NotFoundException {
+    public CuentaClienteDTO create(CreateCuentaDTO dto) {
         if (cuentaRepository.existsByNumeroCuenta(dto.getNumeroCuenta())){
             throw new AlreadyExistException("La cuenta ya existe");
         }
@@ -64,8 +65,9 @@ public class CuentaServiceImpl implements CuentaService {
                 .orElseThrow(() -> new UnprocessableEntityException("Error al crear la cuenta"));
     }
 
+    @Transactional
     @Override
-    public CuentaDTO update(Long id, UpdateCuentaDTO dto) throws NotFoundException {
+    public CuentaDTO update(Long id, UpdateCuentaDTO dto) {
         return cuentaRepository.findById(id)
                 .map(c -> cuentaMapper.partialUpdate(dto, c))
                 .map(this::save)
@@ -74,7 +76,7 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public void delete(Long id) throws NotFoundException {
+    public void delete(Long id) {
         if (!cuentaRepository.existsById(id)){
             throw new NotFoundException("No existe la cuenta con id " + id);
         }

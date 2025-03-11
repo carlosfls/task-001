@@ -34,14 +34,14 @@ public class MovimientoServiceImpl implements MovimientoService {
     }
 
     @Override
-    public MovimientoDTO getById(Long id) throws NotFoundException {
+    public MovimientoDTO getById(Long id) {
         return movimientoRepository.findById(id)
                 .map(movimientoMapper::toDto)
                 .orElseThrow(() -> new NotFoundException("Movimiento con id " + id + " no existe"));
     }
 
     @Override
-    public MovimientoDTO create(CreateMovimientoDTO dto) throws NotFoundException {
+    public MovimientoDTO create(CreateMovimientoDTO dto) {
         Cuenta cuenta = cuentaService.getByNumber(dto.getNoCuenta());
         if (dto.getValor() < 0 && cuenta.getSaldoDisponible() < Math.abs(dto.getValor())){
             throw new NotFoundException("Saldo no disponible");
@@ -67,7 +67,7 @@ public class MovimientoServiceImpl implements MovimientoService {
     }
 
     @Override
-    public void delete(Long id) throws NotFoundException {
+    public void delete(Long id) {
         if (!movimientoRepository.existsById(id)){
             throw new NotFoundException("No existe el movimiento con id " + id);
         }

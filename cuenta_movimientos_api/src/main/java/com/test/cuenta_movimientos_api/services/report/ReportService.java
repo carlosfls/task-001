@@ -17,5 +17,5 @@ public interface ReportService {
      * @return {@link List<EstadoCuentaDTO>} Los movimientos de ese cliente en cada cuenta filtrados por fecha (si se especifica un rango).
      * @throws NotFoundException si el cliente no tiene cuentas asociadas.
      */
-    List<EstadoCuentaDTO> getEstadoCuenta(String clienteId, LocalDate fechaInicio, LocalDate fechaFin) throws NotFoundException;
+    List<EstadoCuentaDTO> getEstadoCuenta(String clienteId, LocalDate fechaInicio, LocalDate fechaFin);
 }

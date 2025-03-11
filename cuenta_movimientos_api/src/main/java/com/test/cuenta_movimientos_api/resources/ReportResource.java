@@ -1,6 +1,5 @@
 package com.test.cuenta_movimientos_api.resources;
 
-import com.test.cuenta_movimientos_api.exceptions.NotFoundException;
 import com.test.cuenta_movimientos_api.services.report.ReportService;
 import com.test.cuenta_movimientos_api.services.report.dto.EstadoCuentaDTO;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class ReportResource {
     public ResponseEntity<List<EstadoCuentaDTO>> getEstadoCuenta(
             @RequestParam String clienteId,
             @RequestParam(required = false) LocalDate fechaInicio,
-            @RequestParam(required = false) LocalDate fechaFin) throws NotFoundException {
+            @RequestParam(required = false) LocalDate fechaFin) {
 
         return ResponseEntity.ok(reportService.getEstadoCuenta(clienteId, fechaInicio, fechaFin));
     }

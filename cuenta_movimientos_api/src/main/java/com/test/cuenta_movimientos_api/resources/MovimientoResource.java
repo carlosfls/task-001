@@ -1,8 +1,5 @@
 package com.test.cuenta_movimientos_api.resources;
 
-import com.test.cuenta_movimientos_api.exceptions.AlreadyExistException;
-import com.test.cuenta_movimientos_api.exceptions.NotFoundException;
-import com.test.cuenta_movimientos_api.exceptions.UnprocessableEntityException;
 import com.test.cuenta_movimientos_api.services.movimientos.MovimientoService;
 import com.test.cuenta_movimientos_api.services.movimientos.dto.CreateMovimientoDTO;
 import com.test.cuenta_movimientos_api.services.movimientos.dto.MovimientoDTO;
@@ -36,17 +33,17 @@ public class MovimientoResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovimientoDTO> getById(@PathVariable Long id) throws NotFoundException {
+    public ResponseEntity<MovimientoDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(movimientoService.getById(id));
     }
 
     @PostMapping
-    public ResponseEntity<MovimientoDTO> create(@RequestBody @Valid CreateMovimientoDTO dto) throws UnprocessableEntityException, AlreadyExistException, NotFoundException {
+    public ResponseEntity<MovimientoDTO> create(@RequestBody @Valid CreateMovimientoDTO dto) {
         return ResponseEntity.status(201).body(movimientoService.create(dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) throws NotFoundException {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         movimientoService.delete(id);
 
         return ResponseEntity.noContent().build();

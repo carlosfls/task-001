@@ -27,7 +27,7 @@ public class ReportServiceImpl implements ReportService {
     private final ReportMapper reportMapper;
 
     @Override
-    public List<EstadoCuentaDTO> getEstadoCuenta(String clienteId, LocalDate fechaInicio, LocalDate fechaFin) throws NotFoundException {
+    public List<EstadoCuentaDTO> getEstadoCuenta(String clienteId, LocalDate fechaInicio, LocalDate fechaFin) {
         if (!cuentaService.existCuentaForCliente(clienteId)) {
             throw new NotFoundException("No existe la cuenta para el cliente "+ clienteId);
         }

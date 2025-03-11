@@ -1,6 +1,5 @@
 package com.test.cuenta_movimientos_api.services.integrations.impl;
 
-import com.test.cuenta_movimientos_api.exceptions.NotFoundException;
 import com.test.cuenta_movimientos_api.services.integrations.ClientePersonaClient;
 import com.test.cuenta_movimientos_api.services.integrations.ClientePersonaService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,7 @@ public class ClientePersonaServiceImpl implements ClientePersonaService {
     private final ClientePersonaClient clientePersonaClient;
 
     @Override
-    public String getClientName(String clienteId) throws NotFoundException {
+    public String getClientName(String clienteId) {
         return clientePersonaClient.getClientNameByClienteId(clienteId);
     }
 }

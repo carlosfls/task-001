@@ -1,6 +1,5 @@
 package com.test.cuenta_movimientos_api.services.integrations;
 
-import com.test.cuenta_movimientos_api.exceptions.NotFoundException;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,5 +8,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ClientePersonaClient {
 
     @GetMapping(value = "/clientes/clienteId/{clienteId}")
-    String getClientNameByClienteId(@PathVariable String clienteId) throws NotFoundException;
+    String getClientNameByClienteId(@PathVariable String clienteId);
 }

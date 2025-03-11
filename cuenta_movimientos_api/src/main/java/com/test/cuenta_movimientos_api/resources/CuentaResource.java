@@ -1,8 +1,5 @@
 package com.test.cuenta_movimientos_api.resources;
 
-import com.test.cuenta_movimientos_api.exceptions.AlreadyExistException;
-import com.test.cuenta_movimientos_api.exceptions.NotFoundException;
-import com.test.cuenta_movimientos_api.exceptions.UnprocessableEntityException;
 import com.test.cuenta_movimientos_api.services.cuentas.CuentaService;
 import com.test.cuenta_movimientos_api.services.cuentas.dto.CreateCuentaDTO;
 import com.test.cuenta_movimientos_api.services.cuentas.dto.CuentaClienteDTO;
@@ -39,22 +36,22 @@ public class CuentaResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CuentaDTO> getById(@PathVariable Long id) throws NotFoundException {
+    public ResponseEntity<CuentaDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(cuentaService.getById(id));
     }
 
     @PostMapping
-    public ResponseEntity<CuentaClienteDTO> create(@RequestBody @Valid CreateCuentaDTO dto) throws UnprocessableEntityException, AlreadyExistException, NotFoundException {
+    public ResponseEntity<CuentaClienteDTO> create(@RequestBody @Valid CreateCuentaDTO dto) {
         return ResponseEntity.status(201).body(cuentaService.create(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CuentaDTO> update(@PathVariable Long id, @RequestBody UpdateCuentaDTO dto) throws NotFoundException {
+    public ResponseEntity<CuentaDTO> update(@PathVariable Long id, @RequestBody UpdateCuentaDTO dto) {
         return ResponseEntity.ok(cuentaService.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) throws NotFoundException {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         cuentaService.delete(id);
 
         return ResponseEntity.noContent().build();
