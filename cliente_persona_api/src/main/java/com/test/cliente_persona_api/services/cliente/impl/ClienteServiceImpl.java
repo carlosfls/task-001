@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Service
 @RequiredArgsConstructor
 public class ClienteServiceImpl implements ClienteService {
@@ -50,6 +49,7 @@ public class ClienteServiceImpl implements ClienteService {
                 .orElseThrow(() -> new NotFoundException("Cliente con id " + clienteId + " no existe"));
     }
 
+    @Transactional
     @Override
     public ClienteDTO create(CreateClienteDTO dto) {
         if (clienteRepository.existsByClienteId(dto.getClienteId())){
@@ -63,6 +63,7 @@ public class ClienteServiceImpl implements ClienteService {
                 .orElseThrow(() -> new UnprocessableEntityException("Error al salvar el cliente"));
     }
 
+    @Transactional
     @Override
     public ClienteDTO update(Long id, UpdateClienteDTO dto) {
         return clienteRepository.findById(id)
@@ -72,6 +73,7 @@ public class ClienteServiceImpl implements ClienteService {
                 .orElseThrow(() -> new NotFoundException("No existe el cliente con id " + id));
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!clienteRepository.existsById(id)){
