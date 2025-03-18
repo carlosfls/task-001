@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://host.docker.internal:5432/db_assingment
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
 
   jpa:
     show-sql: false
@@ -17,4 +17,4 @@ config:
 
 feign:
   cliente_persona:
-    uri: http://cliente-persona-api:8081/api
+    uri: ${FEIGN_CLIENTE_PERSONA_URI}

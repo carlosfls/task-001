@@ -1,23 +1,46 @@
 services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: db_assingment
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - expenses-network
+
   cliente-persona-api:
-    image: carlosfls/cliente-persona-api:1.1
+    image: carlosfls/cliente-persona-api:1.2
     mem_limit: 700m
     container_name: cliente-persona-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/db_assingment
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
     ports:
     - "8081:8081"
     networks:
       - expenses-network
     depends_on:
-      - cuenta-movimiento-api
+      - postgres
 
   cuenta-movimiento-api:
-    image: carlosfls/cuenta-movimiento-api:1.1
+    image: carlosfls/cuenta-movimientos-api:1.2
     mem_limit: 700m
     container_name: cuenta-movimiento-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/db_assingment
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      FEIGN_CLIENTE_PERSONA_URI: http://cliente-persona-api:8081/api
     ports:
     - "8080:8080"
     networks:
       - expenses-network
+    depends_on:
+      - postgres
 
 networks:
   expenses-network:
