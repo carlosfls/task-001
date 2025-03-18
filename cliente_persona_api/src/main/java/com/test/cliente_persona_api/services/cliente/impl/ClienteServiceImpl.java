@@ -73,7 +73,6 @@ public class ClienteServiceImpl implements ClienteService {
                 .orElseThrow(() -> new NotFoundException("No existe el cliente con id " + id));
     }
 
-    @Transactional
     @Override
     public void delete(Long id) {
         if (!clienteRepository.existsById(id)){
