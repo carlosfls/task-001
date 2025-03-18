@@ -12,7 +12,7 @@ services:
       - expenses-network
 
   cliente-persona-api:
-    image: carlosfls/cliente-persona-api:1.3
+    image: carlosfls/cliente-persona-api:1.5
     mem_limit: 700m
     container_name: cliente-persona-api
     environment:
@@ -27,7 +27,7 @@ services:
       - postgres
 
   cuenta-movimiento-api:
-    image: carlosfls/cuenta-movimientos-api:1.4
+    image: carlosfls/cuenta-movimientos-api:1.5
     mem_limit: 700m
     container_name: cuenta-movimiento-api
     environment:
