@@ -27,7 +27,7 @@ services:
       - postgres
 
   cuenta-movimiento-api:
-    image: carlosfls/cuenta-movimientos-api:1.5
+    image: carlosfls/cuenta-movimientos-api:1.6
     mem_limit: 700m
     container_name: cuenta-movimiento-api
     environment:
