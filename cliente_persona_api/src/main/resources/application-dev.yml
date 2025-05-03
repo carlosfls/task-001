@@ -5,6 +5,18 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
 
+ kafka:
+    producer:
+      bootstrap-servers: localhost:9092 localhost:9094
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.StringSerializer
+      acks: all
+      retries: 3
+      properties:
+        retry:
+          backoff:
+            ms: 1000
+
  jpa:
    hibernate:
      ddl-auto: update

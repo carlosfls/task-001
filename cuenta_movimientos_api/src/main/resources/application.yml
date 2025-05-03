@@ -3,7 +3,7 @@ spring:
     name: cuenta-movimientos-api
 
   profiles:
-    active: dev
+    active: local
 
 server:
   servlet:

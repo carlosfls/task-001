@@ -5,6 +5,18 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
 
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092 localhost:9094
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: delete-cuenta-topic-events
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+
   jpa:
     show-sql: true
     hibernate:
